@@ -1,0 +1,61 @@
+CREATE TABLE [dbo].[Books](
+	[B_Id] [int] IDENTITY(1,1) NOT NULL,
+	[B_Title] [nchar](50) NOT NULL,
+	[B_Category] [nchar](30) NOT NULL,
+	[B_Author] [nchar](30) NOT NULL,
+	[B_Status] [bit] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[B_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [dbo].[Books] ADD  DEFAULT ((1)) FOR [B_Status]
+
+
+CREATE TABLE [dbo].[Users](
+	[U_ID] [int] IDENTITY(1,1) NOT NULL,
+	[U_FirstName] [nchar](30) NOT NULL,
+	[U_LastName] [nchar](30) NOT NULL,
+	[U_Type] [nchar](10) NOT NULL,
+	[U_Phone] [nvarchar](50) NOT NULL,
+	[U_Email] [nvarchar](50) NOT NULL,
+	[U_Password] [nvarchar](50) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[U_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+CREATE TABLE [dbo].[Loan](
+	[L_Id] [int] IDENTITY(1,1) NOT NULL,
+	[U_Id] [int] NOT NULL,
+	[B_Id] [int] NOT NULL,
+	[L_BorrowDate] [date] NOT NULL,
+	[L_ReturnDate] [date] NOT NULL,
+	[L_ReturnedDate] [date] NULL,
+	[L_Fined] [bit] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[L_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+ALTER TABLE [dbo].[Loan]  WITH CHECK ADD  CONSTRAINT [B_ID_FK] FOREIGN KEY([B_Id])
+REFERENCES [dbo].[Books] ([B_Id])
+
+
+ALTER TABLE [dbo].[Loan] CHECK CONSTRAINT [B_ID_FK]
+
+
+ALTER TABLE [dbo].[Loan]  WITH CHECK ADD  CONSTRAINT [U_ID_FK] FOREIGN KEY([U_Id])
+REFERENCES [dbo].[Users] ([U_ID])
+
+
+ALTER TABLE [dbo].[Loan] CHECK CONSTRAINT [U_ID_FK]
+
+
+
+
