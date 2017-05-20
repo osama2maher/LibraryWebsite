@@ -1,0 +1,63 @@
+<%@ Page Title="Add Book" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AdminAddBook.aspx.cs" Inherits="LibraryWebsite.Pages.Books.AdminAddBook" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+      <h2><%: Title %>.</h2>
+    <p class="text-danger">
+        <asp:Literal runat="server" ID="ErrorMessage" />
+    </p>
+
+    <div class="form-horizontal">
+        <h4>Add new Book to the Library </h4>
+        <hr />
+        <asp:ValidationSummary runat="server" CssClass="text-danger"  ID="validationSummary"/>
+
+        <div class="form-group">
+            <asp:Label runat="server"  AssociatedControlID="txtBoxNewCategory" CssClass="col-md-2 control-label">New Category</asp:Label>
+            <div class="col-md-10">
+                <asp:TextBox runat="server" ID="txtBoxNewCategory" Width="80%" CssClass="form-control" />
+                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtBoxNewCategory" ValidationGroup="addCategoryValidationGroup" Display="Dynamic"
+                    CssClass="text-danger" ErrorMessage="The Book Title field is required." />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-offset-2 col-md-10">
+                <asp:Button runat="server" ID ="btnAddCategory"  Text="Add Category" CssClass="btn btn-default"  OnClick="btnAddCategory_Click" ValidationGroup="addCategoryValidationGroup"/>
+            </div>
+            <br />
+        </div>
+        <hr />
+        <br />
+        <div class="form-group">
+            <asp:Label runat="server"  AssociatedControlID="dropDownBoxCategory" CssClass="col-md-2 control-label">Category</asp:Label>
+            <div class="col-md-10">
+                <asp:DropDownList runat="server" ID="dropDownBoxCategory" Width="80%" CssClass="form-control"  AutoPostBack="true"/>
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="dropDownBoxCategory" Display="Dynamic"  ValidationGroup="addBookValidationGroup"
+                    CssClass="text-danger" ErrorMessage="The Category field is required." />
+            </div>
+        </div>
+
+        <div class="form-group">
+           <asp:Label runat="server" AssociatedControlID="txtBoxBookTitle" CssClass="col-md-2 control-label">Book Title</asp:Label>
+            <div class="col-md-10">
+                 <asp:TextBox runat="server" ID="txtBoxBookTitle" Width="80%" CssClass="form-control" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtBoxBookTitle" Display="Dynamic"  ValidationGroup="addBookValidationGroup"
+                    CssClass="text-danger" ErrorMessage="The Book Title field is required." />
+            </div>
+        </div>
+
+        <div class="form-group">
+           <asp:Label runat="server" AssociatedControlID="txtBoxBookAuthor" CssClass="col-md-2 control-label">Book Author</asp:Label>
+            <div class="col-md-10">
+                 <asp:TextBox runat="server" ID="txtBoxBookAuthor" Width="80%" CssClass="form-control" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtBoxBookAuthor" Display="Dynamic"  ValidationGroup="addBookValidationGroup"
+                    CssClass="text-danger" ErrorMessage="The Author field is required." />
+            </div>
+        </div>
+
+        
+        <div class="row">
+            <div class="col-md-offset-2 col-md-10">
+                <asp:Button runat="server" ID ="btnAdd"  Text="Add Book" CssClass="btn btn-default" OnClick="btnAdd_Click"  ValidationGroup="addBookValidationGroup"/>
+            </div>
+        </div>
+</asp:Content>
